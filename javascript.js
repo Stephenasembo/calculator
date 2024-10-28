@@ -2,7 +2,7 @@ const container = document.querySelector('#container');
 // Basic math operations of a regular calculator
 function add (first, second)
 {
-    return first + second;
+    return Number(first) + Number(second);
 }
 
 function subtract (first, second)
@@ -24,6 +24,7 @@ let id;
 let firstNumber = '';
 let operator = '';
 let secondNumber = '';
+let result = '';
 
 const display = document.querySelector('#display');
 function updateDisplay(text)
@@ -42,6 +43,7 @@ buttonsArray.forEach((button) =>
             firstNumber = getFirstNumber(id);
             operator = getOperator(id);
             secondNumber = getSecondNumber(id);
+            operate (firstNumber, operator, secondNumber, id);
         });
     })
     
@@ -88,7 +90,7 @@ function getSecondNumber(id)
     {
         secondNumber += id;
     }
-    return secondNumber;
+        return secondNumber;
 }
 
 function isDigit(id)
@@ -100,5 +102,30 @@ function isDigit(id)
     else
     {
         return false;
+    }
+}
+
+function operate(first, operator, second, id)
+{
+    if (id == '=')
+    {
+        let result = '';
+        let operation = operator
+        switch (operation)
+        {
+            case '+':
+                result = add(first, second)
+                break;
+            case '-':
+                result = subtract(first, second)
+                break;
+            case '*':
+                result = multiply(first, second)
+                break;
+            case '/':
+                result = divide(first, second)
+                break;                     
+        }
+        return result;    
     }
 }
