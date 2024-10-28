@@ -1,0 +1,6 @@
+Create a container with boundaries.
+    Create a display.
+    Create buttons for each number.
+    Create buttons for each operator.
+    Create an equal sign button.
+    Create a clear button.

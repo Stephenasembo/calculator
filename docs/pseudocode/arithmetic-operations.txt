@@ -1,0 +1,18 @@
+1. Create functions for each of the basic math operations
+
+2. Get user input
+    Get first number
+    Get operator
+    Get second number
+
+3. If equal sign pressed :
+    Call operate function
+    Round off the result
+    Display the result on the screen
+
+4. Else if operator pressed :
+    Call operate function
+    Round off the result
+    Use the result as the first number
+    Get the number entered as the second number
+    Repeat the procedure from step 3
