@@ -20,7 +20,9 @@ function divide (first, second)
     return first / second;
 }
 
-let firstNumber;
+let id;
+let firstNumber = '';
+let operator;
 let secondNumber;
 
 const display = document.querySelector('#display');
@@ -34,12 +36,38 @@ const buttonsArray = Array.from(buttons);
 
 buttonsArray.forEach((button) => 
     {
-        button.addEventListener('click', () => {
-        getButtonId(button)});
+        button.addEventListener('click', () =>
+        {
+            id = getButtonId(button);
+            firstNumber += id;
+            operator = getOperator(id);
+        });
     })
     
 function getButtonId(button)
 {
-    firstNumber = button.id;
-    updateDisplay(firstNumber);
+    return button.id;
+}
+
+function getOperator(id)
+{
+    switch (id)
+    {
+        case '+':
+            operator = '+';
+            break;
+
+        case '-':
+            operator = '-';
+            break;
+
+        case '*':
+            operator = '-';
+            break;
+
+        case '/':
+            operator = '/';
+            break;
+    }
+    return operator;
 }
