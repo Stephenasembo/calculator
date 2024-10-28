@@ -126,6 +126,14 @@ function operate(first, operator, second, id)
                 result = divide(first, second)
                 break;                     
         }
+        resetCalculator();
         return result;    
     }
+}
+
+function resetCalculator()
+{
+    firstNumber = '';
+    operator = '';
+    secondNumber = '';
 }
