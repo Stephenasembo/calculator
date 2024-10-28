@@ -65,7 +65,7 @@ function getOperator(id)
             break;
 
         case '*':
-            operator = '-';
+            operator = '*';
             break;
 
         case '/':
