@@ -22,8 +22,8 @@ function divide (first, second)
 
 let id;
 let firstNumber = '';
-let operator;
-let secondNumber;
+let operator = '';
+let secondNumber = '';
 
 const display = document.querySelector('#display');
 function updateDisplay(text)
@@ -39,8 +39,9 @@ buttonsArray.forEach((button) =>
         button.addEventListener('click', () =>
         {
             id = getButtonId(button);
-            firstNumber += id;
+            firstNumber = getFirstNumber(id);
             operator = getOperator(id);
+            secondNumber = getSecondNumber(id);
         });
     })
     
@@ -70,4 +71,34 @@ function getOperator(id)
             break;
     }
     return operator;
+}
+
+function getFirstNumber(id)
+{
+    if ((!(operator)) && isDigit(id))
+    {
+        firstNumber += id;
+    }
+    return firstNumber;
+}
+
+function getSecondNumber(id)
+{
+    if ((operator) && isDigit(id))
+    {
+        secondNumber += id;
+    }
+    return secondNumber;
+}
+
+function isDigit(id)
+{
+    if (id >= 0 && id <= 9)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
