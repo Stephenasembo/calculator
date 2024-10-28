@@ -1,0 +1,41 @@
+#container {
+    width: 400px;
+    height: 500px;
+    margin: auto;
+    border: 5px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#display {
+    height: 100px;
+    width: 400px;
+    flex: 1 0 auto;
+    border: 5px solid black;
+    box-sizing: border-box;
+    border-bottom: 10px solid black;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+#calculatorBody {
+    width: 400px;
+    height: 400px;
+    display: flex;
+}
+
+#digits {
+    flex: auto;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#operators {
+    width: 100px;
+    flex: auto;
+}
