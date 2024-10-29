@@ -49,6 +49,14 @@ buttonsArray.forEach((button) =>
             calculate();
         });
     })
+    document.addEventListener('keydown', (event) =>
+        {
+            if (isDigit(event.key))
+            {
+                id = event.key;
+                calculate();
+            }
+        })
     
 function calculate()
 {
