@@ -17,6 +17,10 @@ function multiply (first, second)
 
 function divide (first, second)
 {
+    if (second == 0)
+    {
+        return 'WOAH!'
+    }
     return first / second;
 }
 
@@ -58,7 +62,7 @@ function calculate()
     {
         if ((secondNumber))
         {
-            result = operate(firstNumber, operator, secondNumber);
+            operate(firstNumber, operator, secondNumber);
         }
         if (result)
         {
@@ -155,7 +159,7 @@ function operate(first, operator, second)
 {
     {
         display.innerText = '';
-        let operation = operator
+        let operation = operator;
         switch (operation)
         {
             case '+':
@@ -174,7 +178,6 @@ function operate(first, operator, second)
         resetCalculator();
         updateDisplay(result);
     }
-    return result;    
 }
 
 function resetCalculator()
@@ -184,14 +187,6 @@ function resetCalculator()
     secondNumber = '';
     display.innerText = '';
     isOperatorPresent = false;
-}
-
-function continueCalculation(id)
-{
-    if ((result) && isOperator(id))
-    {
-        operate(result, operator, second, id);
-    }
 }
 
 function isOperator(id)
