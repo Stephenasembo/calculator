@@ -45,7 +45,7 @@ buttonsArray.forEach((button) =>
             firstNumber = getFirstNumber(id);
             operator = getOperator(id);
             secondNumber = getSecondNumber(id);
-            operate (firstNumber, operator, secondNumber, id);
+            result = operate (firstNumber, operator, secondNumber, id);
             clearCalculator();
         });
     })
@@ -85,6 +85,11 @@ function getOperator(id)
 
 function getFirstNumber(id)
 {
+    if (result)
+    {
+        resetCalculator();
+        result = '';
+    }
     if ((isOperatorPresent == false) && isDigit(id))
     {
         firstNumber += id;
@@ -120,7 +125,7 @@ function operate(first, operator, second, id)
     if (id == '=')
     {
         display.innerText = '';
-        let result = '';
+        result = '';
         let operation = operator
         switch (operation)
         {
@@ -148,6 +153,8 @@ function resetCalculator()
     firstNumber = '';
     operator = '';
     secondNumber = '';
+    display.innerText = '';
+    isOperatorPresent = false;
 }
 
 function clearCalculator()
@@ -155,7 +162,5 @@ function clearCalculator()
     if (id == 'clear')
     {
         resetCalculator();
-        display.innerText = '';
-        isOperatorPresent = false;
     }
 }
