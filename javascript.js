@@ -56,6 +56,21 @@ buttonsArray.forEach((button) =>
                 id = event.key;
                 calculate();
             }
+            else if (isOperator(event.key))
+            {
+                id = event.key;
+                calculate();
+            }
+            else if (event.key == 'Enter')
+            {
+                id = '=';
+                calculate();
+            }
+            else if (event.key == 'Escape')
+            {
+                id = 'clear';
+                calculate();
+            }
         })
     
 function calculate()
