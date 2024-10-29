@@ -56,6 +56,14 @@ function calculate()
 
     else if (isOperator(id))
     {
+        if ((secondNumber))
+        {
+            result = operate(firstNumber, operator, secondNumber);
+        }
+        if (result)
+        {
+            firstNumber = result;
+        }
         operator = getOperator(id);
     }
 
@@ -104,10 +112,13 @@ function getOperator(id)
 
 function getFirstNumber(id)
 {
-    if ((result) && isDigit(id))
+    if ((result))
     {
-        resetCalculator();
-        result = '';
+        if (isDigit(id) && (isOperatorPresent == false))
+        {
+            resetCalculator();
+            result = '';
+        }
     }
 
     if ((isOperatorPresent == false) && isDigit(id))
@@ -115,7 +126,6 @@ function getFirstNumber(id)
         firstNumber += id;
         updateDisplay(id);
     }
-
     return firstNumber;
 }
 
