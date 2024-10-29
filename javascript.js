@@ -39,17 +39,36 @@ const buttonsArray = Array.from(buttons);
 
 buttonsArray.forEach((button) => 
     {
-        button.addEventListener('click', () =>
+        button.addEventListener('click', () => 
         {
             id = getButtonId(button);
-            firstNumber = getFirstNumber(id);
-            operator = getOperator(id);
-            secondNumber = getSecondNumber(id);
-            result = operate (firstNumber, operator, secondNumber, id);
-            clearCalculator();
+            calculate();
         });
     })
     
+function calculate()
+{
+    if (isDigit(id))
+    {
+        firstNumber = getFirstNumber(id);
+        secondNumber = getSecondNumber(id);
+    }
+
+    else if (isOperator(id))
+    {
+        operator = getOperator(id);
+    }
+
+    else if (id == '=')
+    {
+        operate(firstNumber, operator, secondNumber);
+    }
+
+    else if (id == 'clear')
+    {
+        resetCalculator();
+    }
+}
 function getButtonId(button)
 {
     return button.id;
@@ -57,7 +76,7 @@ function getButtonId(button)
 
 function getOperator(id)
 {
-    if (!(isDigit(id)))
+    if (!(isDigit(id)) && isOperator(id))
     {
         switch (id)
         {
@@ -85,16 +104,18 @@ function getOperator(id)
 
 function getFirstNumber(id)
 {
-    if (result)
+    if ((result) && isDigit(id))
     {
         resetCalculator();
         result = '';
     }
+
     if ((isOperatorPresent == false) && isDigit(id))
     {
         firstNumber += id;
         updateDisplay(id);
     }
+
     return firstNumber;
 }
 
@@ -120,12 +141,10 @@ function isDigit(id)
     }
 }
 
-function operate(first, operator, second, id)
+function operate(first, operator, second)
 {
-    if (id == '=')
     {
         display.innerText = '';
-        result = '';
         let operation = operator
         switch (operation)
         {
@@ -157,10 +176,22 @@ function resetCalculator()
     isOperatorPresent = false;
 }
 
-function clearCalculator()
+function continueCalculation(id)
 {
-    if (id == 'clear')
+    if ((result) && isOperator(id))
     {
-        resetCalculator();
+        operate(result, operator, second, id);
+    }
+}
+
+function isOperator(id)
+{
+    if (id == '+' || id == '-' || id == '*' || id == '/')
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
