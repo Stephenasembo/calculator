@@ -23,10 +23,12 @@ function divide (first, second)
 let id;
 let firstNumber = '';
 let operator = '';
+let isOperatorPresent = false;
 let secondNumber = '';
 let result = '';
 
 const display = document.querySelector('#display');
+display.innerText = '';
 function updateDisplay(text)
 {
     display.innerText += text;
@@ -54,43 +56,50 @@ function getButtonId(button)
 
 function getOperator(id)
 {
-    switch (id)
+    if (!(isDigit(id)))
     {
-        case '+':
-            operator = '+';
-            break;
+        switch (id)
+        {
+            case '+':
+                operator = '+';
+                break;
 
-        case '-':
-            operator = '-';
-            break;
+            case '-':
+                operator = '-';
+                break;
 
-        case '*':
-            operator = '*';
-            break;
+            case '*':
+                operator = '*';
+                break;
 
-        case '/':
-            operator = '/';
-            break;
+            case '/':
+                operator = '/';
+                break;
+        }
+        isOperatorPresent = true;
+        updateDisplay(operator)
     }
-    return operator;
+    return operator;    
 }
 
 function getFirstNumber(id)
 {
-    if ((!(operator)) && isDigit(id))
+    if ((isOperatorPresent == false) && isDigit(id))
     {
         firstNumber += id;
+        updateDisplay(firstNumber);
     }
     return firstNumber;
 }
 
 function getSecondNumber(id)
 {
-    if ((operator) && isDigit(id))
+    if ((isOperatorPresent == true) && isDigit(id))
     {
         secondNumber += id;
+        updateDisplay(secondNumber);
     }
-        return secondNumber;
+    return secondNumber;
 }
 
 function isDigit(id)
@@ -109,6 +118,7 @@ function operate(first, operator, second, id)
 {
     if (id == '=')
     {
+        display.innerText = '';
         let result = '';
         let operation = operator
         switch (operation)
@@ -127,8 +137,9 @@ function operate(first, operator, second, id)
                 break;                     
         }
         resetCalculator();
-        return result;    
+        updateDisplay(result);
     }
+    return result;    
 }
 
 function resetCalculator()
