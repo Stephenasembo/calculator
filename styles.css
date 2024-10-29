@@ -1,6 +1,6 @@
 #container {
     width: 400px;
-    height: 500px;
+    height: 600px;
     margin: auto;
     border: 5px solid black;
     display: flex;
@@ -24,7 +24,7 @@ button {
 
 #calculatorBody {
     width: 400px;
-    height: 400px;
+    height: 500px;
     display: flex;
 }
 
@@ -39,3 +39,11 @@ button {
     width: 100px;
     flex: auto;
 }
+
+ .zero {
+    width: 200px;
+ }
+
+ #clear {
+    width: 200px;
+ }
