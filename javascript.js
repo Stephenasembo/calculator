@@ -78,6 +78,11 @@ buttonsArray.forEach((button) =>
                 id = '.';
                 calculate();
             }
+            else if (event.key == 'Backspace')
+            {
+                id = 'backspace';
+                calculate();
+            }
         })
     
 function calculate()
@@ -88,15 +93,17 @@ function calculate()
         secondNumber = getSecondNumber(id);
     }
 
-    else if (isOperator(id))
+    if (isOperator(id))
     {
-        if ((secondNumber))
         {
-            operate(firstNumber, operator, secondNumber);
-        }
-        if (result)
-        {
-            firstNumber = result;
+            if ((secondNumber))
+            {
+                operate(firstNumber, operator, secondNumber);
+            }
+            if (result)
+            {
+                firstNumber = result;
+            }
         }
         operator = getOperator(id);
     }
@@ -109,6 +116,35 @@ function calculate()
     else if (id == 'clear')
     {
         resetCalculator();
+    }
+
+    if (id == "backspace")
+    {
+        if (secondNumber)
+        {
+            deleteSecondNumber();
+            let newInput = backspace(display.innerText);
+            display.innerText = newInput;
+            return;
+        }
+        if (isOperatorPresent)
+        {
+            deleteOperator();
+            let newInput = backspace(display.innerText);
+            display.innerText = newInput;
+            return;
+        }
+        if (firstNumber)
+        {
+            deleteFirstNumber();
+            let newInput = backspace(display.innerText);
+            display.innerText = newInput;
+            return
+        }
+        if (result)
+        {
+            resetCalculator();
+        }
     }
 }
 function getButtonId(button)
@@ -141,6 +177,10 @@ function getOperator(id)
         isOperatorPresent = true;
         isDotPresent = false;
         updateDisplay(operator)
+    }
+    if (id == 'backspace')
+    {
+
     }
     return operator;    
 }
@@ -183,6 +223,10 @@ function getSecondNumber(id)
         updateDisplay(id);
         isDotPresent = true;
     }
+    if ((id == 'backspace') && isOperatorPresent)
+    {
+        secondNumber = backspace(secondNumber);
+    }    
     return secondNumber;
 }
 
@@ -242,5 +286,42 @@ function isOperator(id)
     else
     {
         return false;
+    }
+}
+
+function backspace (userInput)
+{
+    if (userInput != '')
+    {
+        let arrayInput = Array.from(userInput);
+        let lastInput = (arrayInput.length) - 1;
+        arrayInput.splice(lastInput, 1);
+        let stringInput = arrayInput.join('');
+        return stringInput;
+    }
+}
+
+function deleteFirstNumber()
+{
+    if ((!secondNumber) && (!isOperatorPresent) && firstNumber)
+    {
+        firstNumber = backspace(firstNumber);
+    }
+}
+
+function deleteSecondNumber()
+{
+    if (secondNumber && isOperatorPresent)
+    {
+        secondNumber = backspace(secondNumber);
+    }
+}
+
+function deleteOperator()
+{
+    if ((!secondNumber) && isOperatorPresent && firstNumber)
+    {
+        operator = backspace(operator);
+        isOperatorPresent = false;
     }
 }
