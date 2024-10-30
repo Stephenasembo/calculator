@@ -1,0 +1,4 @@
+Listen for keyboard events on the webpage
+    When key representing number or operator pressed
+        Obtain the value of the key pressed
+        Use the value in the calculation
