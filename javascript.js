@@ -30,6 +30,7 @@ let operator = '';
 let isOperatorPresent = false;
 let secondNumber = '';
 let result = '';
+let isDotPresent = false;
 
 const display = document.querySelector('#display');
 display.innerText = '';
@@ -49,6 +50,7 @@ buttonsArray.forEach((button) =>
             calculate();
         });
     })
+
     document.addEventListener('keydown', (event) =>
         {
             if (isDigit(event.key))
@@ -61,7 +63,7 @@ buttonsArray.forEach((button) =>
                 id = event.key;
                 calculate();
             }
-            else if (event.key == 'Enter')
+            else if (event.key == 'Enter' || event.key == '=')
             {
                 id = '=';
                 calculate();
@@ -71,11 +73,16 @@ buttonsArray.forEach((button) =>
                 id = 'clear';
                 calculate();
             }
+            else if (event.key == '.')
+            {
+                id = '.';
+                calculate();
+            }
         })
     
 function calculate()
 {
-    if (isDigit(id))
+    if (isDigit(id) || (id == '.'))
     {
         firstNumber = getFirstNumber(id);
         secondNumber = getSecondNumber(id);
@@ -132,6 +139,7 @@ function getOperator(id)
                 break;
         }
         isOperatorPresent = true;
+        isDotPresent = false;
         updateDisplay(operator)
     }
     return operator;    
@@ -153,6 +161,12 @@ function getFirstNumber(id)
         firstNumber += id;
         updateDisplay(id);
     }
+    if ((isOperatorPresent == false) && id == '.' && (!(isDotPresent)) && (!(result)))
+    {
+        firstNumber += id;
+        updateDisplay(id);
+        isDotPresent = true;
+    }
     return firstNumber;
 }
 
@@ -162,6 +176,12 @@ function getSecondNumber(id)
     {
         secondNumber += id;
         updateDisplay(id);
+    }
+    if ((isOperatorPresent == true) && id == '.' && (!(isDotPresent)))
+    {
+        secondNumber += id;
+        updateDisplay(id);
+        isDotPresent = true;
     }
     return secondNumber;
 }
@@ -200,6 +220,7 @@ function operate(first, operator, second)
         }
         resetCalculator();
         updateDisplay(result);
+        isDotPresent = false;
     }
 }
 
