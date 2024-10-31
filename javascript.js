@@ -125,7 +125,7 @@ function calculate()
         resetCalculator();
     }
 
-    if (id == "backspace")
+    if (id == 'backspace')
     {
         if (secondNumber)
         {
@@ -275,7 +275,7 @@ function operate(first, operator, second)
         {
             if(isFloat(result))
             {
-                let dotIndex = (Array.from(result)).findIndex('.');
+                let dotIndex = (Array.from(result)).findIndex((item) => item == '.');
                 result = Number(result).toFixed(displaySize - (dotIndex + 1));
             }
             else
