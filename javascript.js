@@ -31,6 +31,8 @@ let isOperatorPresent = false;
 let secondNumber = '';
 let result = '';
 let isDotPresent = false;
+let isFirstNumberNegative = false;
+let isSecondNumberNegative = false;
 
 const display = document.querySelector('#display');
 // Our calculator can only display a maximum of 13 digits
@@ -152,6 +154,11 @@ function calculate()
         {
             resetCalculator();
         }
+    }
+
+    if (id == 'negate')
+    {
+        makeNumberNegative();
     }
 }
 function getButtonId(button)
@@ -374,4 +381,69 @@ function roundInteger(number)
     }
     newArray.splice(valueToRoundIndex, numberOfDeletedValues, numberToRound);
     return newArray.join('');
+}
+
+function makeNumberNegative()
+{
+    let firstNumberArray = Array.from(firstNumber);
+    let secondNumberArray = Array.from(secondNumber);
+
+    if (result)
+        {
+            if (!isOperatorPresent)
+            {
+                return;
+            }
+            if (isOperatorPresent && (!secondNumber))
+                {
+                    secondNumberArray.unshift('-');
+                    secondNumber = secondNumberArray.join('');
+                    isSecondNumberNegative = true;
+                    updateDisplay('-');
+                }
+            else if ((secondNumberArray.length < 2) && isOperatorPresent && isSecondNumberNegative)
+                {
+                    secondNumberArray.shift();
+                    secondNumber = secondNumberArray.join('');
+                    isSecondNumberNegative = false;
+                    let textDisplayArray = Array.from(display.innerText);
+                    textDisplayArray.splice(textDisplayArray.length - 1)
+                    display.innerText = textDisplayArray.join('');
+                }
+            return;
+        }
+    
+
+    if ((!firstNumber) && (!isOperatorPresent))
+    {
+        firstNumberArray.unshift('-');
+        firstNumber = firstNumberArray.join('');
+        isFirstNumberNegative = true;
+        updateDisplay('-');
+    }
+    else if ((firstNumberArray.length < 2) && (!isOperatorPresent) && isFirstNumberNegative)
+    {
+        firstNumberArray.shift();
+        firstNumber = firstNumberArray.join('');
+        isFirstNumberNegative = false;
+        display.innerText = firstNumber;
+    }
+
+    if (firstNumber && isOperatorPresent && (!secondNumber))
+    {
+        secondNumberArray.unshift('-');
+        secondNumber = secondNumberArray.join('');
+        isSecondNumberNegative = true;
+        updateDisplay('-');
+    }
+    else if ((secondNumberArray.length < 2) && isOperatorPresent && isSecondNumberNegative)
+    {
+        secondNumberArray.shift();
+        secondNumber = secondNumberArray.join('');
+        isSecondNumberNegative = false;
+        let textDisplayArray = Array.from(display.innerText);
+        textDisplayArray.splice(textDisplayArray.length - 1)
+        display.innerText = textDisplayArray.join('');
+    }
+
 }
