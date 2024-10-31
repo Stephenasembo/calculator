@@ -1,0 +1,24 @@
+Add the button to the layout of the calculator
+When button is pressed obtain the id
+    If result is present
+        Exit
+
+    If the first number is empty and no operator is present
+        Append a negative sign to the first number
+        Update the state of the number to negative
+        Update the display
+
+    Else if first number has only negative sign no operator present and state is negative
+        Remove the negative sign at the beginning of the number
+        Update state of the number to positive
+        Update Display
+
+    If the first number present, operator present and second number is empty
+        Append a negative sign to the second number
+        Update the state of the number to negative
+        Update the display
+
+    Else if second number has only negative sign operator present and state is negative
+        Remove the negative sign at the beginning of the number
+        Update the state of the number to positive
+        Update display
