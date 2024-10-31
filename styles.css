@@ -53,12 +53,16 @@ button {
     width: 200px;
  }
 
- #clear {
-    width: 200px;
+ #clear, .delete {
     background-color: #ff5959;
  }
 
  .operator {
     background-color: aquamarine;
+    color: black;
+ }
+
+ #negate, .dot, .equal {
+    background-color: #eced42;
     color: black;
  }
