@@ -161,7 +161,7 @@ function getButtonId(button)
 
 function getOperator(id)
 {
-    if (!(isDigit(id)) && isOperator(id))
+    if (!(isDigit(id)) && isOperator(id) && (!isOperatorPresent))
     {
         switch (id)
         {
