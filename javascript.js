@@ -33,10 +33,15 @@ let result = '';
 let isDotPresent = false;
 
 const display = document.querySelector('#display');
+// Our calculator can only display a maximum of 13 digits
+const displaySize = 13;
 display.innerText = '';
 function updateDisplay(text)
 {
-    display.innerText += text;
+    if ((display.innerText).length < displaySize)
+    {
+        display.innerText += text;
+    }
 }
 
 buttons = document.querySelectorAll('button');
@@ -87,33 +92,35 @@ buttonsArray.forEach((button) =>
     
 function calculate()
 {
-    if (isDigit(id) || (id == '.'))
+    if ((display.innerText).length < displaySize)
     {
-        firstNumber = getFirstNumber(id);
-        secondNumber = getSecondNumber(id);
-    }
-
-    if (isOperator(id))
-    {
+        if (isDigit(id) || (id == '.'))
         {
-            if ((secondNumber))
-            {
-                operate(firstNumber, operator, secondNumber);
-            }
-            if (result)
-            {
-                firstNumber = result;
-            }
+            firstNumber = getFirstNumber(id);
+            secondNumber = getSecondNumber(id);
         }
-        operator = getOperator(id);
-    }
 
-    else if (id == '=')
+        if (isOperator(id))
+        {
+            {
+                if ((secondNumber))
+                {
+                    operate(firstNumber, operator, secondNumber);
+                }
+                if (result)
+                {
+                    firstNumber = result;
+                }
+            }
+            operator = getOperator(id);
+        }
+    }
+    if (id == '=')
     {
         operate(firstNumber, operator, secondNumber);
     }
 
-    else if (id == 'clear')
+    if (id == 'clear')
     {
         resetCalculator();
     }
@@ -263,6 +270,19 @@ function operate(first, operator, second)
                 break;                     
         }
         resetCalculator();
+        result += '';
+        if (result.length > displaySize)
+        {
+            if(isFloat(result))
+            {
+                let dotIndex = (Array.from(result)).findIndex('.');
+                result = Number(result).toFixed(displaySize - (dotIndex + 1));
+            }
+            else
+            {
+                result = roundInteger(result);
+            }
+        }
         updateDisplay(result);
         isDotPresent = false;
     }
@@ -324,4 +344,34 @@ function deleteOperator()
         operator = backspace(operator);
         isOperatorPresent = false;
     }
+}
+
+function isFloat(number)
+{
+    let newString = number.toString();
+    let newArray = Array.from(newString);
+    let dotExist = newArray.includes('.');
+    return dotExist;
+}
+
+function roundInteger(number)
+{
+    let newArray = Array.from(number.toString());
+    let valueToRoundIndex = 12;
+    let valueToLookIndex = 13;
+    let numberOfDeletedValues = (newArray.length) - 12;
+    let numberToRound = Number(newArray[valueToRoundIndex]);
+    let numberToLook = Number(newArray[valueToLookIndex]);
+
+    if (numberToLook >= 5)
+    {
+        numberToRound += 1;
+        numberToRound += '';
+    }
+    else
+    {
+        numberToRound += '';
+    }
+    newArray.splice(valueToRoundIndex, numberOfDeletedValues, numberToRound);
+    return newArray.join('');
 }
